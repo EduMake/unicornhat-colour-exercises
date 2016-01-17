@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RGB Colour Code Picker</title>
+    <style>
+    body{font-size:170%;}
+    input{
+		float:left;
+		font-size:200%;
+		width:49%;
+		min-width:530px;
+	}
+	
+	#output{
+		top:10px;
+		float:left;
+		width:49%;
+		min-width:500px;
+	}
+	
+	#output th{
+		text-align:left;
+	}
+    </style>
+</head>
+<body>
+
+
+<header>
+	<h1>RGB Colour Code Picker</h1>
+</header>
+<input id="picker" class="jscolor {onFineChange:'update(this)', width:500, height:300}" value="ffcc00" length="8" size="8">
+
+<table id="output">
+    <tr><th>R, G, B<sub>10</sub></th><td id="rgb"></td></tr>
+    <tr><th>R, G, B<sub>2</sub></th><td id="Brgb"></td></tr>
+    <tr><th>R, G, B<sub>16</sub></th><td id="Hrgb"></td></tr>
+    <tr><th>HEX String</th><td id="hex-str"></td></tr>
+    <tr><th>RGB String</th><td id="rgb-str"></td></tr>
+    <tr><th>H, S, V</th><td id="hsv"></td></tr>
+</table>
+
+<script src="jscolor.js"></script>
+<script>
+function ready(fn) {
+  if (document.readyState != 'loading'){
+    fn();
+  } else {
+    document.addEventListener('DOMContentLoaded', fn);
+  }
+}
+
+
+var matches = function(el, selector) {
+  return (el.matches || el.matchesSelector || el.msMatchesSelector || el.mozMatchesSelector || el.webkitMatchesSelector || el.oMatchesSelector).call(el, selector);
+};
+
+
+var toBinary = function(bin){
+    var str = bin.toString(2);
+    var pad = "00000000";
+    return ans = pad.substring(0, pad.length - str.length) + str;    
+}
+
+var toHex = function(bin){
+    var str = bin.toString(16).toUpperCase();
+    var pad = "00";
+    return ans = pad.substring(0, pad.length - str.length) + str;    
+}
+
+function update(picker) {
+    document.getElementById('hex-str').innerHTML = picker.toHEXString();
+    document.getElementById('rgb-str').innerHTML = picker.toRGBString();
+
+    document.getElementById('rgb').innerHTML =
+        Math.round(picker.rgb[0]) + ', ' +
+        Math.round(picker.rgb[1]) + ', ' +
+        Math.round(picker.rgb[2]);
+
+    document.getElementById('Brgb').innerHTML =
+       toBinary(Math.round(picker.rgb[0]))+ ', ' +
+       toBinary(Math.round(picker.rgb[1])) + ', ' +
+       toBinary(Math.round(picker.rgb[2]));
+       
+    document.getElementById('Hrgb').innerHTML =
+       toHex(Math.round(picker.rgb[0]))+ ', ' +
+       toHex(Math.round(picker.rgb[1])) + ', ' +
+       toHex(Math.round(picker.rgb[2]));
+
+    document.getElementById('hsv').innerHTML =
+        Math.round(picker.hsv[0]) + '&deg;, ' +
+        Math.round(picker.hsv[1]) + '%, ' +
+        Math.round(picker.hsv[2]) + '%';
+}
+
+ready(function(){
+	document.getElementById('picker').jscolor.show();
+	update(document.getElementById('picker').jscolor);
+});
+</script>
+
+
+
+</body>
+</html>

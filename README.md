@@ -3,8 +3,8 @@
 * numbers are displayed as images 
   * decimal and binary entry for 8 lines (could use the binary addition ui)
 * intro the idea of indexed colour by have the the foreground and background changeble
-  * each colour updaetable through linked inout of binary , hex or decimal
-* The images are displyed on Hats if running
+  * each colour update-able through linked input of binary , hex or decimal
+* The images are displayed on Hats if running
 
 maybe the task is to make it change the background colour (the foreground is already done)
 with tests :)
