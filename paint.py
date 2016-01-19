@@ -26,9 +26,20 @@ control_panel += """
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/paint')
 def home():
 	return render_template('paint.html')
+
+
+@app.route('/colours')
+def colours():
+	return render_template('colours.html')
+
+
+@app.route('/')
+def bitmap():
+	return render_template('bitmap.html')
+
 
 @app.route('/save/<filename>')
 def save(filename):
@@ -74,5 +85,5 @@ def set_pixel(x, y, r, g, b):
 	return "ok"
 
 if __name__ == "__main__":
-	unicorn.brightness(0.3)
-	app.run(host='0.0.0.0', debug=True)
+	unicorn.brightness(0.1)
+	app.run(host='0.0.0.0', debug=True, port=80)
